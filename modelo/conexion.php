@@ -1,4 +1,4 @@
 <?php
-$conexion=new mysqli("localhost","root","","crud_php");
+$conexion=new mysqli("localhost","ibm5b","ibm5b","ibm5b");
 $conexion->set_charset("utf8");
 ?>
