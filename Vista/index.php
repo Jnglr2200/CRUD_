@@ -12,8 +12,8 @@
 <div class="row m-0 p-0" style="height: 100vh;">
   
   <div class="col-md-6 d-flex justify-content-center pt-4">
-    <form action="insertar.php" method="POST" class="row g-3 w-75">
-      <h2>Formulario de Registro</h2>
+  <form action="../controlador/insertar.php" method="POST" class="row g-3 w-75">
+  <h2>Formulario de Registro</h2>
 
       <div class="col-12">
         <label for="direccion" class="form-label">Dirección</label>
@@ -86,10 +86,11 @@ while($datos = $sql->fetch_object()){ ?>
     <td><?= $datos->sexo ?></td>
     <td><?= $datos->telefono ?></td>
     <td>
-    <a href="editar.php?id=<?= $datos->id ?>"><i class="fa-solid fa-user-pen" title="Editar"></i></a>
-    <a href="eliminar.php?id=<?= $datos->id ?>" onclick="return confirm('¿Estás seguro de eliminar este registro?');">
-        <i class="fa-solid fa-trash" title="Eliminar"></i>
-    </a>
+    <a href="../controlador/editar.php?id=<?= $datos->id ?>"><i class="fa-solid fa-user-pen" title="Editar"></i></a>
+<a href="../controlador/eliminar.php?id=<?= $datos->id ?>" onclick="return confirm('¿Estás seguro de eliminar este registro?');">
+    <i class="fa-solid fa-trash" title="Eliminar"></i>
+</a>
+
 </td>
 
 </tr>

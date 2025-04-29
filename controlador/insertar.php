@@ -1,8 +1,8 @@
-<?php
+<?php 
 if (!empty($_POST["btnguardar"])) {
     if (!empty($_POST["direccion"]) && !empty($_POST["estadocivil"]) && !empty($_POST["persona"]) && !empty($_POST["sexo"]) && !empty($_POST["telefono"])) {
 
-        include "../modelo/conexion.php"; // Asegúrate que esta ruta sea correcta según tu estructura
+        include "../modelo/conexion.php";
 
         $direccion = $_POST["direccion"];
         $estadocivil = $_POST["estadocivil"];
@@ -14,7 +14,10 @@ if (!empty($_POST["btnguardar"])) {
                                  VALUES('$direccion', '$estadocivil', '$persona', '$sexo', '$telefono')");
 
         if ($sql === TRUE) {
-            echo "<script>alert('Registro guardado correctamente'); window.location.href='index.php';</script>";
+            echo "<script>
+                alert('Registro guardado correctamente');
+                window.location.href='../Vista/index.php';
+            </script>";
         } else {
             echo "Error al guardar: " . $conexion->error;
         }
