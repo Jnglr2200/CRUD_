@@ -1,12 +1,47 @@
 CREATE DATABASE crud_php;
-
 USE crud_php;
 
+-- Crear la tabla 'direccion'
+CREATE TABLE direccion (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    descripcion VARCHAR(255) NOT NULL
+);
+
+-- Crear la tabla 'estado_civil'
+CREATE TABLE estado_civil (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    descripcion VARCHAR(100) NOT NULL
+);
+
+-- Crear la tabla 'persona'
+CREATE TABLE persona (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    nombre VARCHAR(255) NOT NULL
+);
+
+-- Crear la tabla 'sexo'
+CREATE TABLE sexo (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    descripcion VARCHAR(50) NOT NULL
+);
+
+-- Crear la tabla 'telefono'
+CREATE TABLE telefono (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    numero VARCHAR(20) NOT NULL
+);
+ñ
+-- Crear la tabla 'personas' que contiene las claves foráneas
 CREATE TABLE personas (
     id INT AUTO_INCREMENT PRIMARY KEY,
-    direccion VARCHAR(255) NOT NULL,
-    estado_civil VARCHAR(50) NOT NULL,
-    persona VARCHAR(100) NOT NULL,
-    sexo VARCHAR(10) NOT NULL,
-    telefono VARCHAR(15) NOT NULL
+    id_direccion INT,
+    id_estado_civil INT,
+    id_persona INT,
+    id_sexo INT,
+    id_telefono INT,
+    FOREIGN KEY (id_direccion) REFERENCES direccion(id),
+    FOREIGN KEY (id_estado_civil) REFERENCES estado_civil(id),
+    FOREIGN KEY (id_persona) REFERENCES persona(id),
+    FOREIGN KEY (id_sexo) REFERENCES sexo(id),
+    FOREIGN KEY (id_telefono) REFERENCES telefono(id)
 );
