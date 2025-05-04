@@ -1,7 +1,6 @@
 <?php
 include "../modelo/conexion.php";
 
-// Verificar si se recibió un ID
 if (!empty($_GET["id"])) {
     $id = $_GET["id"];
     $sql = $conexion->query("SELECT * FROM personas WHERE id = $id");
@@ -17,8 +16,7 @@ if (!empty($_GET["id"])) {
     exit;
 }
 
-// Procesar la actualización
-// Procesar la actualización
+
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["btnguardar"])) {
     if (
         !empty($_POST["direccion"]) &&

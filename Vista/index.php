@@ -76,25 +76,53 @@
         <tbody>
         <?php
 include_once __DIR__ . '/../modelo/conexion.php';
-$sql = $conexion->query("SELECT * FROM personas");
-while($datos = $sql->fetch_object()){ ?>
+$sql = $conexion->query("
+    SELECT 
+        p.id,
+        d.descripcion AS direcciones,
+        ec.descripcion AS estado_civil,
+        pe.nombre AS persona,
+        s.descripcion AS sexo,
+        t.numero AS telefono
+    FROM personas p
+    INNER JOIN direccion d ON p.id_direccion = d.id
+    INNER JOIN estado_civil ec ON p.id_estado_civil = ec.id
+    INNER JOIN persona pe ON p.id_persona = pe.id
+    INNER JOIN sexo s ON p.id_sexo = s.id
+    INNER JOIN telefono t ON p.id_telefono = t.id
+");
+?>
+
+<tbody>
+<?php
+// Consulta SQL con alias para las columnas
+$sql = $conexion->query("SELECT p.id, p.nombre AS persona, d.descripcion AS direccion, ec.descripcion AS estado_civil, s.descripcion AS sexo, t.numero AS telefono
+                         FROM personas p
+                         JOIN direccion d ON p.id_direccion = d.id
+                         JOIN estado_civil ec ON p.id_estado_civil = ec.id
+                         JOIN sexo s ON p.id_sexo = s.id
+                         JOIN telefono t ON p.id_telefono = t.id");
+
+while($datos = $sql->fetch_object()) {
+?>
 <tr>
     <td><?= $datos->id ?></td>
-    <td><?= $datos->direccion ?></td>
-    <td><?= $datos->estado_civil ?></td>
-    <td><?= $datos->persona ?></td>
-    <td><?= $datos->sexo ?></td>
-    <td><?= $datos->telefono ?></td>
+    <td><?= $datos->direccion ?></td> <!-- Aquí usamos el alias 'direccion' -->
+    <td><?= $datos->estado_civil ?></td> <!-- Aquí usamos el alias 'estado_civil' -->
+    <td><?= $datos->persona ?></td> <!-- Aquí usamos el alias 'persona' -->
+    <td><?= $datos->sexo ?></td> <!-- Aquí usamos el alias 'sexo' -->
+    <td><?= $datos->telefono ?></td> <!-- Aquí usamos el alias 'telefono' -->
     <td>
-    <a href="../controlador/editar.php?id=<?= $datos->id ?>"><i class="fa-solid fa-user-pen" title="Editar"></i></a>
-<a href="../controlador/eliminar.php?id=<?= $datos->id ?>" onclick="return confirm('¿Estás seguro de eliminar este registro?');">
-    <i class="fa-solid fa-trash" title="Eliminar"></i>
-</a>
-
-</td>
-
+        <a href="../controlador/editar.php?id=<?= $datos->id ?>"><i class="fa-solid fa-user-pen" title="Editar"></i></a>
+        <a href="../controlador/eliminar.php?id=<?= $datos->id ?>" onclick="return confirm('¿Estás seguro de eliminar este registro?');">
+            <i class="fa-solid fa-trash" title="Eliminar"></i>
+        </a>
+    </td>
 </tr>
 <?php } ?>
+
+</tbody>
+
 
          
         </tbody>
